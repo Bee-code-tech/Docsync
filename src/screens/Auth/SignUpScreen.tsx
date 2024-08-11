@@ -1,14 +1,32 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { AuthStackParamList } from '../../navigation/AuthStack';
 
-const SignUpScreen = () => {
+const SignUpScreen: React.FC = () => {
+  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+
   return (
-    <View>
-      <Text>SignUpScreen</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Sign Up Screen</Text>
+      <Button
+        title="Go to Login"
+        onPress={() => navigation.navigate('Login')}
+      />
     </View>
-  )
-}
+  );
+};
 
-export default SignUpScreen
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+  },
+});
 
-const styles = StyleSheet.create({})
+export default SignUpScreen;

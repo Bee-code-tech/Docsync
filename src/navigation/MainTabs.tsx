@@ -1,28 +1,16 @@
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from '../screens/Home/HomeScreen';
 
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+const Tab = createBottomTabNavigator();
 
-const MainTabs = () => {
+const MainTabs: React.FC = () => {
   return (
-    <View>
-      <Text>MainTabs
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      {/* Add other tabs here */}
+    </Tab.Navigator>
+  );
+};
 
-        ─ screens/
-│   ├── Auth/
-│   │   ├── LoginScreen.js
-│   │   ├── SignUpScreen.js
-│   │   └── SplashScreen.js
-│   ├── Home/
-│   │   ├── HomeScreen.js
-│   │   └── SliderScreen.js
-│   └── More/
-│       └── MoreOptionsScreen.js
-│
-      </Text>
-    </View>
-  )
-}
-
-export default MainTabs
-
-const styles = StyleSheet.create({})
+export default MainTabs;
