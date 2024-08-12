@@ -28,7 +28,8 @@ const SLIDER_DATA = [
     id: '5',
     image: require('../../assets/slide5.png'), 
     description: 'And More...',
-  },
+    
+  }, 
 ];
 
 const { width: screenWidth } = Dimensions.get('window');
