@@ -21,10 +21,13 @@ const SignUpScreen: React.FC = () => {
 
   return (
      <View style={styles.container}>
-      <Text style={styles.heading}>Create Account</Text>
+      <Text style={styles.heading}>Welcome to Docsync</Text>
       <Text style={styles.subheading}>Sign up to get started!</Text>
 
       <View style={styles.inputContainer}>
+         <Text style={styles.label}>
+          Full Name
+        </Text>
         <TextInput
           style={styles.input}
           placeholder="Full Name"
@@ -34,9 +37,12 @@ const SignUpScreen: React.FC = () => {
       </View>
 
       <View style={styles.inputContainer}>
+         <Text style={styles.label}>
+          Email Address
+        </Text>
         <TextInput
           style={styles.input}
-          placeholder="Email"
+          placeholder="Email Address"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
@@ -45,6 +51,9 @@ const SignUpScreen: React.FC = () => {
       </View>
 
       <View style={styles.inputContainer}>
+         <Text style={styles.label}>
+          Password
+        </Text>
         <TextInput
           style={styles.input}
           placeholder="Password"
@@ -61,6 +70,9 @@ const SignUpScreen: React.FC = () => {
       </View>
 
       <View style={styles.inputContainer}>
+         <Text style={styles.label}>
+           Confirm Password
+        </Text>
         <TextInput
           style={styles.input}
           placeholder="Confirm Password"
@@ -76,7 +88,7 @@ const SignUpScreen: React.FC = () => {
 
       <TouchableOpacity style={[styles.button, styles.googleButton]}>
         <Icon name="logo-google" size={20} color="#fff" style={styles.googleIcon} />
-        <Text style={styles.buttonText}>Sign in with Google</Text>
+        <Text style={styles.googleButtonText}>Sign in with Google</Text>
       </TouchableOpacity>
 
       <View style={styles.footer}>
@@ -93,19 +105,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     backgroundColor: '#fff',
   },
   heading: {
     fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 10,
-    fontFamily: 'SpaceGroteskBold', 
+    fontFamily: 'SpaceGrotesk-Bold', 
+    marginTop: 120,
+  },
+  label: {
+    marginBottom:10,
+    fontSize: 16,
+    fontFamily: 'SpaceGrotesk-Regular',
+    fontWeight: 'bold',
   },
   subheading: {
     fontSize: 18,
-    marginBottom: 20,
-    fontFamily: 'SpaceGroteskRegular',
+    marginBottom: 40,
+    fontFamily: 'SpaceGrotesk-Regular',
   },
   inputContainer: {
     marginBottom: 20,
@@ -121,18 +140,27 @@ const styles = StyleSheet.create({
   eyeIcon: {
     position: 'absolute',
     right: 15,
-    top: 15,
+    top: 45,
   },
   button: {
-    backgroundColor: '#0000FF',
+    backgroundColor: '#4D4AD3',
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 20,
   },
   googleButton: {
     flexDirection: 'row',
-    backgroundColor: '#DB4437',
+    backgroundColor: 'rgba(77, 74, 211, 0.1)',
+    alignItems: 'center',
+    justifyContent: 'center'
+
+  },
+  googleButtonText: {
+    color: 'black',
+    fontFamily: 'SpaceGrotesk-Regular',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   googleIcon: {
     marginRight: 10,
@@ -141,6 +169,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+    fontFamily: 'SpaceGrotesk-Regular',
   },
   footer: {
     flexDirection: 'row',
@@ -149,10 +178,12 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 16,
+    fontFamily: 'SpaceGrotesk-Regular',
   },
   linkText: {
     fontSize: 16,
     color: '#0000FF',
+    fontFamily: 'SpaceGrotesk-Regular',
   },
 });
 
