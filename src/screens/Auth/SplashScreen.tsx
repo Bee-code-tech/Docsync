@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, StatusBar, Animated } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, Animated, Image } from 'react-native';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { AuthStackParamList } from '../../navigation/AuthStack';
+import Logo from '../../assets/logo.png';
 
 const SplashScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
@@ -22,11 +23,8 @@ const SplashScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <StatusBar hidden />
-      <Animated.View style={{ ...styles.logoContainer, opacity: fadeAnim }}>
-        <Text style={styles.logo}>
-          App Logo
-          </Text> 
-          {/* Ensure this text is wrapped in a <Text> component */}
+       <Animated.View style={{ ...styles.logoContainer, opacity: fadeAnim }}>
+        <Image source={Logo}  />
       </Animated.View>
     </View>
      
@@ -44,10 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  logo: {
-    fontSize: 32,
-    color: '#FFFFFF',
-  },
+
 });
 
 export default SplashScreen;
