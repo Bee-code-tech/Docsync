@@ -24,7 +24,6 @@ target 'Docsync' do
   )
 
   # Add Lottie dependencies
-  pod 'lottie-react-native', :path => '../node_modules/lottie-react-native'
 
   target 'DocsyncTests' do
     inherit! :complete
