@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { AuthStackParamList } from '../../navigation/AuthStack';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const SignUpScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
-    const [fullName, setFullName] = useState('');
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -14,96 +14,91 @@ const SignUpScreen: React.FC = () => {
 
   const handleSignUp = async () => {
     // Call your signup API here
-    // Example: const userData = await signUpApi(fullName, email, password);
-    // storeUserData(userData);
-     navigation.navigate('SignUp');
+    navigation.navigate('Slider');
   };
 
   return (
-     <View style={styles.container}>
-      <Text style={styles.heading}>Welcome to Docsync</Text>
-      <Text style={styles.subheading}>Sign up to get started!</Text>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.heading}>Welcome to Docsync</Text>
+        <Text style={styles.subheading}>Sign up to get started!</Text>
 
-      <View style={styles.inputContainer}>
-         <Text style={styles.label}>
-          Full Name
-        </Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Full Name"
-          value={fullName}
-          onChangeText={setFullName}
-        />
-      </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Full Name</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Full Name"
+            value={fullName}
+            onChangeText={setFullName}
+          />
+        </View>
 
-      <View style={styles.inputContainer}>
-         <Text style={styles.label}>
-          Email Address
-        </Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Email Address"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-      </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Email Address</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Email Address"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+        </View>
 
-      <View style={styles.inputContainer}>
-         <Text style={styles.label}>
-          Password
-        </Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={!showPassword}
-        />
-        <TouchableOpacity
-          style={styles.eyeIcon}
-          onPress={() => setShowPassword(!showPassword)}
-        >
-          <Icon name={showPassword ? 'eye-off' : 'eye'} size={20} color="#666" />
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Password</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!showPassword}
+          />
+          <TouchableOpacity
+            style={styles.eyeIcon}
+            onPress={() => setShowPassword(!showPassword)}
+          >
+            <Icon name={showPassword ? 'eye-off' : 'eye'} size={20} color="#666" />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Confirm Password</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            secureTextEntry={!showPassword}
+          />
+        </View>
+
+        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+          <Text style={styles.buttonText}>Create Account</Text>
         </TouchableOpacity>
-      </View>
 
-      <View style={styles.inputContainer}>
-         <Text style={styles.label}>
-           Confirm Password
-        </Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          secureTextEntry={!showPassword}
-        />
-      </View>
-
-      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-        <Text style={styles.buttonText}>Create Account</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={[styles.button, styles.googleButton]}>
-        <Icon name="logo-google" size={20} color="#fff" style={styles.googleIcon} />
-        <Text style={styles.googleButtonText}>Sign in with Google</Text>
-      </TouchableOpacity>
-
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>Already have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.linkText}>Login</Text>
+        <TouchableOpacity style={[styles.button, styles.googleButton]}>
+          <Icon name="logo-google" size={20} color="#fff" style={styles.googleIcon} />
+          <Text style={styles.googleButtonText}>Sign in with Google</Text>
         </TouchableOpacity>
-      </View>
-    </View>
+
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Already have an account? </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.linkText}>Login</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     padding: 20,
     justifyContent: 'flex-start',
     backgroundColor: '#fff',
@@ -112,11 +107,11 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 10,
-    fontFamily: 'SpaceGrotesk-Bold', 
-    marginTop: 120,
+    fontFamily: 'SpaceGrotesk-Bold',
+    marginTop: 80,
   },
   label: {
-    marginBottom:10,
+    marginBottom: 10,
     fontSize: 16,
     fontFamily: 'SpaceGrotesk-Regular',
     fontWeight: 'bold',
@@ -153,8 +148,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'rgba(77, 74, 211, 0.1)',
     alignItems: 'center',
-    justifyContent: 'center'
-
+    justifyContent: 'center',
   },
   googleButtonText: {
     color: 'black',

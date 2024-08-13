@@ -20,7 +20,7 @@ const AuthStack: React.FC = () => {
       <Stack.Screen name="Splash" component={SplashScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="SignUp" component={SignUpScreen} />
-      <Stack.Screen name="Slider" component={SliderScreen} />;
+      <Stack.Screen name="Slider" component={SliderScreen} />
     </Stack.Navigator>
   );
 };
