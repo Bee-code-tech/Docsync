@@ -9,6 +9,11 @@ import slide5 from '../../assets/slide5.png';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { AuthStackParamList } from '../../navigation/AuthStack';
 
+interface SliderScreenProps {
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+
 type SliderItem = {
   id: string;
   image: any;
@@ -116,11 +121,11 @@ const Carousel: React.FC<{ data: SliderItem[] }> = ({ data }) => {
   );
 };
 
-const SliderScreen: React.FC = () => {
+const SliderScreen: React.FC<SliderScreenProps> = ({setIsLoggedIn}) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
 
   const handleGetStartedPress = () => {
-    navigation.navigate('Login'); // Navigate to the Login screen
+    setIsLoggedIn(true)
   };
 
   return (

@@ -18,7 +18,6 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({setIsLoggedIn}) => {
 
   const handleSignUp = async () => {
     // Call your signup API here
-    setIsLoggedIn(true);
     navigation.navigate('Slider');
   };
 
