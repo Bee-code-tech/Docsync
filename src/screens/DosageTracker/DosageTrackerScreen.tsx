@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const DosageTrackerScreen = () => {
+const DosageTrackerScreen: React.FC = () => {
   return (
     <View>
       <Text>DosageTrackerScreen</Text>

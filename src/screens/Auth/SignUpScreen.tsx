@@ -4,7 +4,11 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { AuthStackParamList } from '../../navigation/AuthStack';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const SignUpScreen: React.FC = () => {
+interface SignUpScreenProps {
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SignUpScreen: React.FC<SignUpScreenProps> = ({setIsLoggedIn}) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -14,6 +18,7 @@ const SignUpScreen: React.FC = () => {
 
   const handleSignUp = async () => {
     // Call your signup API here
+    setIsLoggedIn(true);
     navigation.navigate('Slider');
   };
 

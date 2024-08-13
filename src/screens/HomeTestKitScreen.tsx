@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const AppointmentsScreen: React.FC = () => {
+const HomeTestKitScreen: React.FC = () => {
   return (
     <View>
-      <Text>AppointmentsScreen</Text>
+      <Text>HomeTestKitScreen</Text>
     </View>
   )
 }
 
-export default AppointmentsScreen
+export default HomeTestKitScreen
 
 const styles = StyleSheet.create({})

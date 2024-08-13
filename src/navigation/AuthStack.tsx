@@ -1,3 +1,4 @@
+// 
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from '../screens/Auth/SplashScreen';
@@ -9,17 +10,25 @@ export type AuthStackParamList = {
   Splash: undefined;
   Login: undefined;
   SignUp: undefined;
-  Slider: undefined; // Add other screens here if needed.
+  Slider: undefined;
 };
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
-const AuthStack: React.FC = () => {
+interface AuthStackProps {
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const AuthStack: React.FC<AuthStackProps> = ({ setIsLoggedIn }) => {
   return (
     <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Splash" component={SplashScreen} />
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
+      <Stack.Screen name="Login">
+        {props => <LoginScreen {...props} setIsLoggedIn={setIsLoggedIn} />}
+      </Stack.Screen>
+      <Stack.Screen name="SignUp">
+        {props => <SignUpScreen {...props} setIsLoggedIn={setIsLoggedIn} />}
+      </Stack.Screen>
       <Stack.Screen name="Slider" component={SliderScreen} />
     </Stack.Navigator>
   );

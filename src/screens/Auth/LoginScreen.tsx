@@ -4,16 +4,19 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { AuthStackParamList } from '../../navigation/AuthStack';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const LoginScreen: React.FC = () => {
+interface LoginScreenProps {
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const LoginScreen: React.FC<LoginScreenProps> = ({setIsLoggedIn}) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
    const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
    const handleLogin = async () => {
-    // Call your login API here and store user data
-    // Example: const userData = await loginApi(email, password);
-    // storeUserData(userData);
+    
+     setIsLoggedIn(true);
      navigation.navigate('SignUp');
   };
 
