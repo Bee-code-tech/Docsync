@@ -1,43 +1,47 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, Animated, Easing } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, Animated, TouchableOpacity } from 'react-native';
 import Logo from '../../assets/logo.png';
 import slide1 from '../../assets/slide1.png';
 import slide2 from '../../assets/slide2.png';
 import slide3 from '../../assets/slide3.png';
 import slide4 from '../../assets/slide4.png';
 import slide5 from '../../assets/slide5.png';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { AuthStackParamList } from '../../navigation/AuthStack';
 
 type SliderItem = {
   id: string;
   image: any;
   description: string;
+  subheading?: string; // Optional subheading for the first slider
 };
 
 const SLIDER_DATA: SliderItem[] = [
   {
     id: '1',
     image: slide1,
-    description: 'Welcome to Docsync. ',
+    description: 'Welcome to Docsync',
+    subheading: 'Your no.1 digital healthcare app in fighting against antimicrobial resistance',
   },
   {
     id: '2',
     image: slide2,
-    description: 'Track your Dosage',
+    description: 'Fight against antimicrobial resistance with technology',
   },
   {
     id: '3',
     image: slide3,
-    description: 'Book Appointments Easily',
+    description: 'Get 24/7 access to reliavle healthcare professionals',
   },
   {
     id: '4',
     image: slide4,
-    description: 'Get Home Test Kits',
+    description: 'Walk into our exclusively digital hospital today',
   },
   {
     id: '5',
     image: slide5,
-    description: 'And More...',
+    description: 'Get affordable healthcare service now!',
   },
 ];
 
@@ -85,7 +89,14 @@ const Carousel: React.FC<{ data: SliderItem[] }> = ({ data }) => {
             <Image source={item.image} style={styles.backgroundImage} />
             <View style={styles.overlay}>
               <Image source={Logo} style={styles.logo} />
-              <Text style={styles.description}>{item.description}</Text>
+              {item.id === '1' ? (
+                <>
+                  <Text style={styles.bigHeading}>{item.description}</Text>
+                  <Text style={styles.subheading}>{item.subheading}</Text>
+                </>
+              ) : (
+                <Text style={styles.heading}>{item.description}</Text>
+              )}
             </View>
           </View>
         )}
@@ -106,9 +117,18 @@ const Carousel: React.FC<{ data: SliderItem[] }> = ({ data }) => {
 };
 
 const SliderScreen: React.FC = () => {
+  const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+
+  const handleGetStartedPress = () => {
+    navigation.navigate('Login'); // Navigate to the Login screen
+  };
+
   return (
     <View style={styles.container}>
       <Carousel data={SLIDER_DATA} />
+      <TouchableOpacity style={styles.getStartedButton} onPress={handleGetStartedPress}>
+        <Text style={styles.getStartedButtonText}>Get Started</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -117,6 +137,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000', // Fallback color if the image doesn't load
+    justifyContent: 'center',
   },
   slide: {
     width: screenWidth,
@@ -130,24 +151,46 @@ const styles = StyleSheet.create({
   },
   overlay: {
     position: 'absolute',
-    top: '2%',
+    top: '1%',
     width: '100%',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    justifyContent: "flex-start",
+    paddingHorizontal: 20,
   },
   logo: {
-    width: 230,
+    width: 250,
     height: 200,
     resizeMode: 'contain',
     marginBottom: 20,
+    marginHorizontal: 'auto',
   },
-  description: {
-    fontSize: 18,
+  bigHeading: {
+    fontSize: 37,
+    fontWeight: '700',
     color: '#FFFFFF',
-    textAlign: 'center',
+    textAlign: 'left',
+    marginBottom: 10,
+    marginTop: 70,
+    fontFamily: 'SpaceGrotesk-Regular',
+  },
+  subheading: {
+    fontSize: 28,
+    color: '#FFFFFF',
+    textAlign: 'left',
+    marginHorizontal: 3,
+    fontFamily: 'SpaceGrotesk-Regular',
+  },
+  heading: {
+    fontSize: 37,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    textAlign: 'left',
+    marginTop: 100,
+    fontFamily: 'SpaceGrotesk-Regular',
   },
   pagination: {
     position: 'absolute',
-    bottom: 40,
+    bottom: 100,
     flexDirection: 'row',
     alignSelf: 'center',
   },
@@ -162,6 +205,24 @@ const styles = StyleSheet.create({
   },
   inactiveDot: {
     backgroundColor: '#888',
+  },
+  getStartedButton: {
+    position: 'absolute',
+    bottom: 20,
+    alignSelf: 'center',
+    backgroundColor: '#FFFFFF',
+    width: '90%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 40,
+    borderRadius: 10,
+  },
+  getStartedButtonText: {
+    color: '#4D4AD3', // Purple color text
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
