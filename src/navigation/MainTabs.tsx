@@ -2,11 +2,18 @@
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/Home/HomeScreen';
+import { Image, View, StyleSheet } from 'react-native';
 import HomeTestKitScreen from '../screens/HomeTestKitScreen';
 import DosageTrackerScreen from '../screens/DosageTracker/DosageTrackerScreen';
 import AppointmentsScreen from '../screens/Appointments/AppointmentsScreen';
 import MoreOptionsScreen from '../screens/MoreOptionsScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import HomeIcon from '../assets/icons/home.png';
+import HomeTestKitIcon from '../assets/icons/kit.png';
+import DosageTrackerIcon from '../assets/icons/dosage.png';
+import AppointmentsIcon from '../assets/icons/appointment.png';
+import MoreIcon from '../assets/icons/more.png';
 
 export type MainTabsParamList = {
   Home: undefined;
@@ -25,26 +32,36 @@ const MainTabs: React.FC = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+        tabBarIcon: ({ focused }) => {
+          let iconSource;
 
           if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home-outline';
+            iconSource = HomeIcon;
           } else if (route.name === 'HomeTestKit') {
-            iconName = focused ? 'medkit' : 'medkit-outline';
+            iconSource = HomeTestKitIcon;
           } else if (route.name === 'DosageTracker') {
-            iconName = focused ? 'clipboard' : 'clipboard-outline';
+            iconSource = DosageTrackerIcon;
           } else if (route.name === 'Appointments') {
-            iconName = focused ? 'calendar' : 'calendar-outline';
+            iconSource = AppointmentsIcon;
           } else if (route.name === 'More') {
-            iconName = focused ? 'ellipsis-horizontal' : 'ellipsis-horizontal-outline';
+            iconSource = MoreIcon;
           }
 
-          return <Ionicons name={iconName || 'default-icon'} size={size} color={color} />;
+          return (
+            <View style={styles.iconContainer}>
+              <Image
+                source={iconSource}
+                style={[
+                  styles.icon,
+                  { tintColor: focused ? '#800080' : 'gray' },
+                ]}
+              />
+            </View>
+          );
         },
+        tabBarShowLabel: true,
         tabBarActiveTintColor: '#800080',
         tabBarInactiveTintColor: 'gray',
-        tabBarShowLabel: true,
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
@@ -55,5 +72,24 @@ const MainTabs: React.FC = () => {
     </Tab.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  iconContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  icon: {
+    width: 24,
+    height: 24,
+    resizeMode: 'contain',
+  },
+  activeLine: {
+    position: 'absolute',
+    bottom: -5,
+    width: '100%',
+    height: 3,
+    backgroundColor: '#800080',
+  },
+});
 
 export default MainTabs;
