@@ -62,6 +62,7 @@ const MainTabs: React.FC = () => {
         tabBarShowLabel: true,
         tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'gray',
+        tabBarActiveFontWeight: '600',
         tabBarActiveFontFamily: 'SpaceGrotesk-Regular',
       })}
     >
@@ -70,10 +71,26 @@ const MainTabs: React.FC = () => {
       component={HomeScreen}
       options={{ headerShown: false }} 
       />
-      <Tab.Screen name="HomeTestKit" component={HomeTestKitScreen} />
-      <Tab.Screen name="DosageTracker" component={DosageTrackerScreen} />
-      <Tab.Screen name="Appointments" component={AppointmentsScreen} />
-      <Tab.Screen name="More" component={MoreOptionsScreen} />
+      <Tab.Screen 
+      name="HomeTestKit" 
+      component={HomeTestKitScreen}
+      options={{ headerShown: false }} 
+      />
+      <Tab.Screen 
+      name="DosageTracker" 
+      component={DosageTrackerScreen} 
+      options={{ headerShown: false }} 
+      />
+      <Tab.Screen 
+      name="Appointments" 
+      component={AppointmentsScreen} 
+      options={{ headerShown: false }} 
+      />
+      <Tab.Screen
+       name="More" 
+       component={MoreOptionsScreen} 
+       options={{ headerShown: false }} 
+       />
     </Tab.Navigator>
   );
 };
