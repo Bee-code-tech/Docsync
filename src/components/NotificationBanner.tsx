@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import alert from '../assets/icons/alert.png'
-import close from '../assets/icons/close.png'
+import alert from '../assets/icons/alert.png';
+import close from '../assets/icons/close.png';
 
 type NotificationBannerProps = {
   name: string;
@@ -12,24 +12,22 @@ type NotificationBannerProps = {
 const NotificationBanner: React.FC<NotificationBannerProps> = ({ name, date, time }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
-        <Image
-          resizeMode="contain"
-          source={{ uri: alert }}
-          style={styles.icon}
-        />
-        <View style={styles.textContainer}>
-          <Text style={styles.title}>
-            {name}, Your Next Antibiotic Dose is Scheduled for {date}, {time}
-          </Text>
-          <Text style={styles.description}>
-            Consistent and timely antibiotic use is crucial in fighting infections and promoting overall health.
-          </Text>
-        </View>
+      <Image
+        resizeMode="contain"
+        source={alert}
+        style={styles.icon}
+      />
+      <View style={styles.textContainer}>
+        <Text style={styles.title}>
+          {name}, Your Next Antibiotic Dose is Scheduled for {date}, {time}
+        </Text>
+        <Text style={styles.description}>
+          Consistent and timely antibiotic use is crucial in fighting infections and promoting overall health.
+        </Text>
       </View>
       <Image
         resizeMode="contain"
-        source={{ uri: close}}
+        source={close}
         style={styles.closeIcon}
       />
     </View>
@@ -38,54 +36,42 @@ const NotificationBanner: React.FC<NotificationBannerProps> = ({ name, date, tim
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'stretch',
+    flexDirection: 'row',
+    alignItems: 'flex-start', 
+    padding: 15,
+    backgroundColor: 'rgba(235, 0, 0, 0.1)', 
     borderRadius: 5,
-    borderColor: 'rgba(255, 149, 0, 0.40)',
-    backgroundColor: 'linear-gradient(92deg, rgba(235, 0, 0, 0.10) 5.72%, rgba(235, 42, 0, 0.07) 97.28%)',
-    display: 'flex',
-    flexDirection: 'column',
-    overflow: 'hidden',
-    fontFamily: 'SpaceGrotesk-Regular, sans-serif',
-    color: 'rgba(0, 0, 0, 1)',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  content: {
-    display: 'flex',
-    alignItems: 'flex-start',
-    gap: 32,
-    justifyContent: 'flex-start',
+    borderColor: 'rgba(255, 149, 0, 0.4)',
+    borderWidth: 1,
+    marginBottom: 20,
   },
   icon: {
-    alignSelf: 'flex-start',
-    position: 'relative',
-    display: 'flex',
-    marginTop: 7,
-    width: 17,
-    flexShrink: 0,
-    aspectRatio: 1,
+    width: 24,
+    height: 24,
+    marginRight: 10, 
   },
   textContainer: {
-    display: 'flex',
+    flex: 1, 
     flexDirection: 'column',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start',
   },
   title: {
-    fontSize: 10,
+    fontSize: 14,
     fontWeight: '600',
+    marginBottom: 5,
+    color: '#000',
+    fontFamily: 'SpaceGrotesk-Bold',
   },
   description: {
-    fontSize: 8,
-    fontWeight: '400',
+    fontSize: 12,
+    color: '#000',
+    fontFamily: 'SpaceGrotesk-Regular',
   },
   closeIcon: {
-    position: 'relative',
-    display: 'flex',
-    width: 20,
-    flexShrink: 0,
-    aspectRatio: 1,
+    width: 20, 
+    height: 20,
+    marginLeft: 10,
   },
 });
 
 export default NotificationBanner;
+

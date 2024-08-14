@@ -1,9 +1,10 @@
+
+
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import CurrentLocation from './CurrentLocation';
-import notification from '../assets/icons/notification.png'
-import cart from '../assets/icons/cart.png'
-
+import notification from '../assets/icons/notification.png';
+import cart from '../assets/icons/cart.png';
 
 const Header: React.FC = () => {
   return (
@@ -12,12 +13,12 @@ const Header: React.FC = () => {
       <View style={styles.iconContainer}>
         <Image
           resizeMode="contain"
-          source={{ uri: notification }}
+          source={notification}
           style={styles.icon}
         />
         <Image
           resizeMode="contain"
-          source={{ uri: cart}}
+          source={cart}
           style={styles.icon}
         />
       </View>
@@ -27,29 +28,23 @@ const Header: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
+    flexDirection: 'row', 
     width: '100%',
     alignItems: 'center',
-    gap: 10,
     justifyContent: 'space-between',
+    paddingHorizontal: 10, 
+    marginBottom: 20,
   },
   iconContainer: {
-    alignSelf: 'stretch',
-    display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
-    gap: 35,
     justifyContent: 'flex-end',
-    margin: 'auto',
+    marginRight: 15
   },
   icon: {
-    alignSelf: 'stretch',
-    position: 'relative',
-    display: 'flex',
-    width: 24,
-    height: 24,
-    flexShrink: 0,
-    margin: 'auto',
-    aspectRatio: 1,
+    width: 30, 
+    height: 30, 
+    marginLeft: 20, 
   },
 });
 

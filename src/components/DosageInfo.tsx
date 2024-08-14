@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import infoDark from '../assets/icons/info-dark.png'
-import doses from '../assets/icons/dose.png'
-import time from '../assets/icons/time.png'
-import rate from '../assets/icons/rate.png'
+import infoDark from '../assets/icons/info-dark.png';
+import doses from '../assets/icons/dose.png';
+import time from '../assets/icons/time.png';
+import rate from '../assets/icons/rate.png';
 
 type DosageInfoProps = {
   totalDoses: number;
@@ -23,237 +23,140 @@ const DosageInfo: React.FC<DosageInfoProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.dosageCard}>
-        <View style={styles.cardContent}>
-          <View style={styles.cardHeader}>
-            <Text style={styles.cardTitle}>Total Doses Prescribed</Text>
-            <Image
-              resizeMode="contain"
-            source={{ uri: infoDark}}
-            style={styles.cardIcon}
-          />
+        <View style={styles.cardHeader}>
+          <Text style={styles.cardTitle}>Total Doses Prescribed</Text>
+          <Image resizeMode="contain" source={infoDark} style={styles.cardIcon} />
         </View>
         <View style={styles.dosageInfo}>
-          <Image
-            resizeMode="contain"
-            source={{ uri: doses }}
-            style={styles.dosageIcon}
-          />
+          <Image resizeMode="contain" source={doses} style={styles.dosageIcon} />
           <Text style={styles.dosageText}>{totalDoses} doses</Text>
         </View>
+        <View style={styles.badge}>
+          <Image resizeMode="contain" source={time} style={styles.badgeIcon} />
+          <Text style={styles.badgeText}>{frequency}</Text>
+        </View>
       </View>
-      <View style={styles.frequencyInfo}>
-        <Image
-          resizeMode="contain"
-          source={{ uri: time}}
-          style={styles.frequencyIcon}
-        />
-        <Text style={styles.frequencyText}>{frequency}</Text>
-      </View>
-    </View>
-    <View style={styles.dosageCard}>
-      <View style={styles.cardContent}>
+      
+      <View style={styles.dosageCard}>
         <View style={styles.cardHeader}>
           <Text style={styles.cardTitle}>Total Doses Used</Text>
-          <Image
-            resizeMode="contain"
-            source={{ uri: infoDark}}
-            style={styles.cardIcon}
-          />
+          <Image resizeMode="contain" source={infoDark} style={styles.cardIcon} />
         </View>
         <View style={styles.dosageInfo}>
-          <Image
-            resizeMode="contain"
-            source={{ uri: doses }}
-            style={styles.dosageIcon}
-          />
+          <Image resizeMode="contain" source={doses} style={styles.dosageIcon} />
           <Text style={styles.dosageText}>{usedDoses} doses</Text>
         </View>
-      </View>
-      <View style={styles.adherenceInfo}>
-        <Text style={styles.adherenceLabel}>Adherence Rate</Text>
-        <View style={styles.adherenceRate}>
-          <Image
-            resizeMode="contain"
-            source={{ uri: rate }}
-            style={styles.adherenceIcon}
-          />
-          <Text style={styles.adherenceText}>{adherenceRate}%</Text>
+        <View style={styles.adherenceInfo}>
+          <Text style={styles.adherenceLabel}>Adherence Rate</Text>
+          <View style={styles.adherenceRate}>
+            <Image resizeMode="contain" source={rate} style={styles.adherenceIcon} />
+            <Text style={styles.adherenceText}>{adherenceRate}%</Text>
+          </View>
+        </View>
+        <View style={styles.badge}>
+          <Image resizeMode="contain" source={time} style={styles.badgeIcon} />
+          <Text style={styles.badgeText}>Last Dose: {lastDoseTaken}</Text>
         </View>
       </View>
     </View>
-    <View style={styles.lastDoseInfo}>
-      <Image
-        resizeMode="contain"
-        source={{ uri: time }}
-        style={styles.lastDoseIcon}
-      />
-      <Text style={styles.lastDoseText}>
-        Last Dose Taken: <Text style={styles.lastDoseDate}>{lastDoseTaken}</Text>
-      </Text>
-    </View>
-  </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    marginTop: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'flex-start',
     gap: 10,
-    fontFamily: 'Space Grotesk, sans-serif',
-    justifyContent: 'flex-start',
+    marginTop: 25,
   },
   dosageCard: {
-    borderRadius: 2,
-    backgroundColor: 'rgba(255, 255, 255, 1)',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
+    flex: 1,
+    borderRadius: 10,
+    backgroundColor: '#FFFFFF',
     padding: 10,
-    borderColor: '3px solid rgba(236, 236, 236, 1)',
-    width: 135,
-  },
-  cardContent: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start',
+    borderWidth: 1,
+    borderColor: 'rgba(236, 236, 236, 1)',
+    height: 'auto',
   },
   cardHeader: {
-    display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
-    fontSize: 7,
-    color: 'rgba(32, 32, 32, 0.8)',
-    fontWeight: '500',
-    justifyContent: 'center',
+    marginBottom: 3,
   },
   cardTitle: {
-    alignSelf: 'stretch',
-    margin: 'auto',
+    fontSize: 10,
+    fontWeight: '600',
+    color: 'black',
+    fontFamily: 'SpaceGrotesk-Bold',
+    marginRight: 5,
   },
   cardIcon: {
-    alignSelf: 'stretch',
-    position: 'relative',
-    display: 'flex',
-    width: 7,
-    flexShrink: 0,
-    margin: 'auto',
-    aspectRatio: 1,
+    width: 9,
+    height: 9,
   },
   dosageInfo: {
-    alignSelf: 'flex-start',
-    display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
-    gap: 3,
-    fontSize: 10,
-    color: 'rgba(0, 0, 0, 1)',
-    fontWeight: '700',
-    justifyContent: 'flex-start',
+    marginBottom: 10,
   },
   dosageIcon: {
-    alignSelf: 'stretch',
-    position: 'relative',
-    display: 'flex',
-    width: 10,
-    flexShrink: 0,
-    margin: 'auto',
-    aspectRatio: 1,
+    width: 20,
+    height: 20,
+    marginRight: 5,
   },
   dosageText: {
-    alignSelf: 'stretch',
-    width: 49,
-    margin: 'auto',
+    fontSize: 16,
+    fontWeight: '600',
+    fontFamily: 'SpaceGrotesk-Bold',
   },
-  frequencyInfo: {
-    borderRadius: 100,
-    alignSelf: 'flex-start',
-    display: 'flex',
-    marginTop: 5,
-    alignItems: 'flex-start',
-    gap: 2,
-    fontSize: 6,
-    color: 'rgba(255, 255, 255, 1)',
-    fontWeight: '500',
-    justifyContent: 'flex-start',
-    padding: 10,
+  badge: {
+    marginTop: 10,
+    borderRadius: 20,
+    backgroundColor: 'rgba(112, 110, 220, 1)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 6,
+    paddingVertical: 5,
   },
-  frequencyIcon: {
-    position: 'relative',
-    display: 'flex',
-    width: 6,
-    flexShrink: 0,
-    aspectRatio: 1,
+  badgeIcon: {
+    width: 9,
+    height: 9,
+    marginRight: 2,
   },
-  frequencyText: {
-    alignSelf: 'stretch',
-    margin: 'auto',
+  badgeText: {
+    fontSize: 7,
+    color: '#FFFFFF',
+    fontFamily: 'SpaceGrotesk-Regular',
   },
   adherenceInfo: {
-    alignSelf: 'flex-start',
-    display: 'flex',
+    marginTop: -10,
+    flexDirection: 'row',
     alignItems: 'center',
-    gap: 3,
-    color: 'rgba(0, 0, 0, 1)',
-    justifyContent: 'flex-start',
+    display: 'flex',
+    color: 'black'
+    
   },
   adherenceLabel: {
-    alignSelf: 'stretch',
-    gap: 5,
-    fontSize: 4,
+    fontSize: 8,
     fontWeight: '500',
-    margin: 'auto',
+    fontFamily: 'SpaceGrotesk-Regular',
+    color: 'black'
   },
   adherenceRate: {
-    alignSelf: 'stretch',
-    display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
-    gap: 2,
-    fontSize: 5,
-    fontWeight: '700',
-    justifyContent: 'flex-start',
-    margin: 'auto',
   },
   adherenceIcon: {
-    alignSelf: 'stretch',
-    position: 'relative',
-    display: 'flex',
-    width: 4,
-    flexShrink: 0,
-    margin: 'auto',
-    aspectRatio: 1,
+    width: 8,
+    height: 8,
+    marginRight: 5,
+    marginLeft: 5,
   },
   adherenceText: {
-    alignSelf: 'stretch',
-    margin: 'auto',
-  },
-  lastDoseInfo: {
-    borderRadius: 100,
-    display: 'flex',
-    marginTop: 5,
-    alignItems: 'flex-start',
-    gap: 2,
-    fontSize: 6,
-    color: 'rgba(255, 255, 255, 1)',
-    fontWeight: '500',
-    justifyContent: 'flex-start',
-    padding: 10,
-  },
-  lastDoseIcon: {
-    position: 'relative',
-    display: 'flex',
-    width: 6,
-    flexShrink: 0,
-    aspectRatio: 1,
-  },
-  lastDoseText: {
-    alignSelf: 'stretch',
-    margin: 'auto',
-  },
-  lastDoseDate: {
+    fontSize: 9,
     fontWeight: '700',
+    fontFamily: 'SpaceGrotesk-Regular',
   },
 });
 

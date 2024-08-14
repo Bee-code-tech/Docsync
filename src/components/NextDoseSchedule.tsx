@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import info from '../assets/icons/info.png'
-import progress from '../assets/icons/progress.png'
-import badge from '../assets/icons/badge.png'
+import info from '../assets/icons/info.png';
+import progress from '../assets/icons/progress.png';
+import badge from '../assets/icons/badge.png';
 
 type NextDoseScheduleProps = {
   nextDoseDate: string;
@@ -19,37 +19,34 @@ const NextDoseSchedule: React.FC<NextDoseScheduleProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.nextDoseInfo}>
-        <View style={styles.nextDoseHeader}>
-          <Text style={styles.nextDoseLabel}>Next Scheduled Dose:</Text>
-          <Image
-            resizeMode="contain"
-            source={{ uri: info }}
-            style={styles.nextDoseIcon}
-          />
+      <View style={styles.leftBox}>
+        <View style={styles.nextDoseInfo}>
+          <View style={styles.nextDoseHeader}>
+            <Text style={styles.nextDoseLabel}>Next Scheduled Dose:</Text>
+            <Image resizeMode="contain" source={info} style={styles.nextDoseIcon} />
+          </View>
+          <Text style={styles.nextDoseDateTime}>
+            {nextDoseDate} by {nextDoseTime}
+          </Text>
         </View>
-        <Text style={styles.nextDoseDateTime}>{nextDoseDate} by {nextDoseTime}</Text>
+        <View style={styles.remainingDosesBadge}>
+          <Image resizeMode="contain" source={progress} style={styles.remainingDosesIcon} />
+          <Text style={styles.remainingDosesText}>Remaining Doses: {remainingDoses} Doses</Text>
+        </View>
       </View>
-      <View style={styles.remainingDosesInfo}>
-        <Image
-          resizeMode="contain"
-          source={{ uri: progress }}
-          style={styles.remainingDosesIcon}
-        />
-        <Text style={styles.remainingDosesText}>Remaining Doses: {remainingDoses} Doses</Text>
-      </View>
-      <View style={styles.scheduleContainer}>
+
+      <View style={styles.rightBox}>
         {scheduleDates.map((date, index) => (
           <View key={index} style={styles.scheduleItem}>
-            {index === 2 && (
-              <Image
-                resizeMode="contain"
-                source={{ uri: badge }}
-                style={styles.currentDateIcon}
-              />
-            )}
-            <View style={styles.dateContainer}>
-              <View style={styles.dateDot} />
+            <View style={styles.barContainer}>
+              <View style={styles.bar} />
+              {index === 2 && (
+                <Image
+                  resizeMode="contain"
+                  source={badge}
+                  style={styles.currentDateIcon}
+                />
+              )}
             </View>
             <Text style={styles.dateText}>{date}</Text>
           </View>
@@ -61,110 +58,103 @@ const NextDoseSchedule: React.FC<NextDoseScheduleProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    marginTop: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    gap: 20,
-    justifyContent: 'flex-start',
+    padding: 0,
+    marginTop: 55,
+    backgroundColor: 'transparent',
+    borderRadius: 10,
+    marginBottom: 20
+  },
+  leftBox: {
+    flex: 1,
+    marginRight: 10,
   },
   nextDoseInfo: {
-    alignSelf: 'stretch',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    fontFamily: 'Space Grotesk, sans-serif',
-    color: 'rgba(255, 255, 255, 1)',
-    justifyContent: 'flex-start',
-    width: 117,
-    margin: 'auto',
+    marginBottom: 10,
   },
   nextDoseHeader: {
-    alignSelf: 'flex-start',
-    display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
-    fontSize: 7,
-    fontWeight: '500',
-    justifyContent: 'center',
+    marginBottom: 5,
   },
   nextDoseLabel: {
-    alignSelf: 'stretch',
-    margin: 'auto',
+    marginRight: 5,
+    fontSize: 10,
+    fontWeight: '500',
+    color: 'white',
+    fontFamily: 'SpaceGrotesk-Regular',
   },
   nextDoseIcon: {
-    alignSelf: 'stretch',
-    position: 'relative',
-    display: 'flex',
-    width: 7,
-    flexShrink: 0,
-    margin: 'auto',
-    aspectRatio: 1,
+    width: 14,
+    height: 14,
   },
   nextDoseDateTime: {
-    fontSize: 10,
-    fontWeight: '700',
-  },
-  remainingDosesInfo: {
-    display: 'flex',
-    marginTop: 7,
-    alignItems: 'flex-start',
-    gap: 5,
-    fontSize: 7,
+    fontSize: 17,
     fontWeight: '600',
-    justifyContent: 'flex-start',
+    fontFamily: 'SpaceGrotesk-Bold',
+    color: 'white',
+
+  },
+  remainingDosesBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(112, 110, 220, 1)',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    marginTop: 6,
   },
   remainingDosesIcon: {
-    alignSelf: 'stretch',
-    position: 'relative',
-    display: 'flex',
-    width: 7,
-    flexShrink: 0,
-    margin: 'auto',
-    aspectRatio: 1,
+    width: 8,
+    height: 8,
+    marginRight: 5,
   },
   remainingDosesText: {
-    alignSelf: 'stretch',
-    margin: 'auto',
+    fontSize: 9,
+    fontWeight: '600',
+    fontFamily: 'SpaceGrotesk-Regular',
+    color: 'white',
   },
-  scheduleContainer: {
-    alignSelf: 'stretch',
-    display: 'flex',
-    alignItems: 'flex-end',
-    gap: 8,
-    justifyContent: 'flex-start',
-    margin: 'auto',
+  rightBox: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flex: 1,
+    marginLeft: 10,
   },
   scheduleItem: {
-    display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
+    position: 'relative',  // Ensure the bar container is positioned relatively
   },
-  dateContainer: {
+  barContainer: {
+    width: 20,
+    height: 60,
     borderRadius: 10,
-    display: 'flex',
-    width: 13,
-    flexDirection: 'column',
-    alignItems: 'stretch',
+    backgroundColor: '#C4C4C4',
+    marginBottom: 5,
+    position: 'relative', // To position the badge absolutely within this container
   },
-  dateDot: {
+  bar: {
+    flex: 1,
     borderRadius: 10,
-    backgroundColor: 'rgba(255, 255, 255, 1)',
-    display: 'flex',
-    flexShrink: 0,
-    height: 40,
+    backgroundColor: 'white',
   },
   dateText: {
-    marginTop: 5,
-    color: 'rgba(255, 255, 255, 1)',
-    fontFamily: ' SpaceGrotesk-Regular, sans-serif',
+    fontSize: 10,
+    fontFamily: 'SpaceGrotesk-Regular',
+    color: 'white',
+    marginTop: 3,
   },
   currentDateIcon: {
-    borderRadius: 4,
-    position: 'relative',
-    display: 'flex',
-    width: 23,
-    aspectRatio: 1.35,
+    width: 45,
+    height: 35,
+    position: 'absolute',
+    top: -45,
+    left: '50%',
+    transform: [{ translateX: -22.5 }], // Centers the badge horizontally on the bar
   },
 });
 

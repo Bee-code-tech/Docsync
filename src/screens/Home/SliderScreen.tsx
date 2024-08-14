@@ -171,12 +171,12 @@ const styles = StyleSheet.create({
   },
   bigHeading: {
     fontSize: 37,
-    fontWeight: '700',
+    fontWeight: '600',
     color: '#FFFFFF',
     textAlign: 'left',
     marginBottom: 10,
     marginTop: 70,
-    fontFamily: 'SpaceGrotesk-Regular',
+    fontFamily: 'SpaceGrotesk-Bold',
   },
   subheading: {
     fontSize: 28,
@@ -187,11 +187,11 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 37,
-    fontWeight: 'bold',
     color: '#FFFFFF',
     textAlign: 'left',
+    fontWeight: '600',
     marginTop: 100,
-    fontFamily: 'SpaceGrotesk-Regular',
+    fontFamily: 'SpaceGrotesk-Bold',
   },
   pagination: {
     position: 'absolute',
@@ -228,6 +228,7 @@ const styles = StyleSheet.create({
     color: '#4D4AD3', // Purple color text
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: 'SpaceGrotesk-Bold',
   },
 });
 

@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
-import refresh from '../assets/icons/refresh.png'
-import info from '../assets/icons/info.png'
-import verified from '../assets/icons/verified.png'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import refresh from '../assets/icons/refresh.png';
+import info from '../assets/icons/info.png';
+import verified from '../assets/icons/verified.png';
+import DosageInfo from './DosageInfo';
+import NextDoseSchedule from './NextDoseSchedule';
 
 type TreatmentOverviewProps = {
   condition: string;
@@ -19,58 +21,78 @@ const TreatmentOverview: React.FC<TreatmentOverviewProps> = ({
 }) => {
   return (
     <View style={styles.container}>
+      {/* Header Section */}
       <View style={styles.header}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Current Treatment Overview</Text>
           <Image
             resizeMode="contain"
-            source={{ uri: info }}
+            source={info}
             style={styles.titleIcon}
           />
         </View>
-        <View style={styles.updateButton}>
+        <TouchableOpacity style={styles.updateButton}>
           <Text style={styles.updateText}>Update</Text>
           <Image
             resizeMode="contain"
-            source={{ uri: refresh }}
+            source={refresh}
             style={styles.updateIcon}
           />
-        </View>
+        </TouchableOpacity>
       </View>
+
+      {/* Details Section */}
       <View style={styles.detailsContainer}>
+        {/* First Column */}
         <View style={styles.detailColumn}>
-          <View style={styles.detailItem}>
-            <Text style={styles.detailLabel}>Health Condition</Text>
-            <Text style={styles.detailValue}>{condition}</Text>
-          </View>
+          <Text style={styles.detailLabel}>Health Condition</Text>
+          <Text style={styles.detailValue}>{condition}</Text>
           <View style={styles.diagnosisContainer}>
             <Image
               resizeMode="contain"
-              source={{ uri: verified}}
+              source={verified}
               style={styles.diagnosisIcon}
             />
-            <Text style={styles.diagnosisText}>Diagnosis by Dr {doctor}</Text>
+            <Text style={styles.diagnosisText}>Diagnosis by Dr. {doctor}</Text>
           </View>
         </View>
+
+        {/* Second Column */}
         <View style={styles.detailColumn}>
-          <View style={styles.detailItem}>
-            <Text style={styles.detailLabel}>Prescribed Antibiotic</Text>
-            <Text style={styles.detailValue}>{antibiotic}</Text>
-          </View>
+          <Text style={styles.detailLabel}>Prescribed Antibiotic</Text>
+          <Text style={styles.detailValue}>{antibiotic}</Text>
           <View style={styles.diagnosisContainer}>
             <Image
               resizeMode="contain"
-              source={{ uri: verified }}
+              source={verified}
               style={styles.diagnosisIcon}
             />
             <Text style={styles.diagnosisText}>As prescribed by Dr. {doctor}</Text>
           </View>
         </View>
-        <View style={styles.detailColumn}>
-          <Text style={styles.detailLabel}>Start Date: </Text>
-          <Text style={styles.detailValue}>{startDate}</Text>
+
+        {/* Third Column */}
+        <View style={styles.detailColumnThree}>
+          <Text style={styles.detailLabelThree}>Start Date</Text>
+          <Text style={styles.detailValueThree}>{startDate}</Text>
         </View>
       </View>
+
+       <DosageInfo
+            totalDoses={10}
+            frequency="1 pill every 12 hours"
+            usedDoses={5}
+            adherenceRate={50}
+            lastDoseTaken="January 13, 4:32 PM"
+          />
+         
+           <NextDoseSchedule
+            nextDoseDate="Jan 13, 2024"
+            nextDoseTime="4:32 AM"
+            remainingDoses={7}
+            scheduleDates={['Jan 11', 'Jan 12', 'Jan 13', 'Jan 14', 'Jan 15']}
+          />
+
     </View>
   );
 };
@@ -79,128 +101,119 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 5,
     backgroundColor: 'rgba(77, 74, 211, 1)',
-    display: 'flex',
-    flexDirection: 'column',
-    overflow: 'hidden',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-    padding: 20,
-    borderColor: 'rgba(112, 110, 220, 1)'
+    padding: 14,
+    borderColor: 'rgba(112, 110, 220, 1)',
+    borderWidth: 1,
   },
   header: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 30,
-    fontFamily: 'Space Grotesk, sans-serif',
-    fontWeight: '700',
+    flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   titleContainer: {
-    alignSelf: 'stretch',
-    display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
-    fontSize: 10,
-    color: 'rgba(255, 255, 255, 1)',
-    justifyContent: 'center',
-    margin: 'auto',
   },
   title: {
-    alignSelf: 'stretch',
-    margin: 'auto',
+    fontSize: 15,
+    color: '#FFFFFF',
+    fontWeight: '600',
+    fontFamily: 'SpaceGrotesk-Bold'
   },
   titleIcon: {
-    alignSelf: 'stretch',
-    position: 'relative',
-    display: 'flex',
-    width: 7,
-    flexShrink: 0,
-    margin: 'auto',
-    aspectRatio: 1,
+    width: 10,
+    height: 10,
+    marginLeft: 5,
+    marginTop: 8,
   },
   updateButton: {
-    borderRadius: 100,
-    backgroundColor: 'rgba(255, 255, 255, 1)',
-    alignSelf: 'stretch',
-    display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
-    overflow: 'hidden',
-    fontSize: 9,
-    color: 'rgba(0, 0, 0, 1)',
-    justifyContent: 'center',
-    margin: 'auto',
-    padding: 8,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
+    paddingVertical: 4,
+    paddingHorizontal: 10,
   },
   updateText: {
-    alignSelf: 'stretch',
-    margin: 'auto',
+    fontSize: 14,
+    fontWeight: '200',
+    color: 'black',
+    fontFamily: 'SpaceGrotesk-Regular',
   },
   updateIcon: {
-    alignSelf: 'stretch',
-    position: 'relative',
-    display: 'flex',
-    width: 10,
-    flexShrink: 0,
-    margin: 'auto',
-    aspectRatio: 1,
+    width: 15,
+    height: 15,
+    marginLeft: 5,
   },
   detailsContainer: {
-    alignSelf: 'stretch',
-    display: 'flex',
-    marginTop: 15,
-    alignItems: 'flex-start',
-    gap: 15,
-    fontFamily: 'SpaceGrotesk-Regular, sans-serif',
-    color: 'rgba(255, 255, 255, 1)',
-    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    gap: 7
+    // backgroundColor: 'red'
   },
   detailColumn: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start',
-    width: 85,
+    flex: 1,
+    // marginRight:,
+    alignItems: 'flex-start',
+    // justifyContent: 'center'
+    // backgroundColor: 'red'
   },
-  detailItem: {
-    display: 'flex',
-    width: 85,
-    flexDirection: 'column',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start',
+  detailColumnThree: {
+    flex: 1,
+    marginLeft: 1,
+    alignItems: 'flex-start',
+    // justifyContent: 'center'
+    // backgroundColor: 'red'
+  },
+  detailLabelThree: {
+    fontSize: 11,
+    color: '#FFFFFF',
+    marginBottom: 0,
+    marginLeft: 10,
+    fontWeight: '600',
+    fontFamily: 'SpaceGrotesk-Regular'
   },
   detailLabel: {
-    fontSize: 8,
-    fontWeight: '400',
+    fontSize: 11,
+    color: '#FFFFFF',
+    marginBottom: 0,
+    fontWeight: '600',
+    fontFamily: 'SpaceGrotesk-Regular'
+  },
+  detailValueThree: {
+    fontSize: 14,
+    color: '#FFFFFF',
+     marginLeft: 10,
+    fontWeight: '600',
+    marginBottom: 3,
+    fontFamily: 'SpaceGrotesk-Bold'
   },
   detailValue: {
-    fontSize: 12,
-    fontWeight: '700',
+    fontSize: 14,
+    color: '#FFFFFF',
+    fontWeight: '600',
+    marginBottom: 3,
+    fontFamily: 'SpaceGrotesk-Bold'
   },
   diagnosisContainer: {
-    borderRadius: 100,
-    backgroundColor: 'rgba(112, 110, 220, 1)',
-    display: 'flex',
-    marginTop: 5,
+    flexDirection: 'row',
     alignItems: 'center',
-    gap: 2,
-    fontSize: 6,
-    fontWeight: '600',
-    justifyContent: 'center',
-    padding: 2,
+    backgroundColor: 'rgba(112, 110, 220, 1)',
+    borderRadius: 20,
+    paddingVertical: 4,
+    paddingHorizontal: 5,
+    marginTop: 10,
   },
   diagnosisIcon: {
-    alignSelf: 'stretch',
-    position: 'relative',
-    display: 'flex',
-    width: 7,
-    flexShrink: 0,
-    margin: 'auto',
-    aspectRatio: 1,
+    width: 10,
+    height: 10,
+    marginRight: 1,
   },
   diagnosisText: {
-    alignSelf: 'stretch',
-    margin: 'auto',
+    fontSize: 7,
+    color: '#FFFFFF',
+    fontFamily: 'SpaceGrotesk-Bold'
   },
 });
 

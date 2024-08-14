@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import profile from '../assets/icons/Profile.png'
-import dropDown from '../assets/icons/Frame.png'
+import profile from '../assets/icons/Profile.png';
+import dropDown from '../assets/icons/Frame.png';
 
 type CurrentLocationProps = {
   location: string;
@@ -12,7 +12,7 @@ const CurrentLocation: React.FC<CurrentLocationProps> = ({ location }) => {
     <View style={styles.container}>
       <Image
         resizeMode="contain"
-        source={{ uri: profile }}
+        source={profile}
         style={styles.locationIcon}
       />
       <View style={styles.locationInfo}>
@@ -21,7 +21,7 @@ const CurrentLocation: React.FC<CurrentLocationProps> = ({ location }) => {
           <Text style={styles.locationText}>{location}</Text>
           <Image
             resizeMode="contain"
-            source={{ uri: dropDown }}
+            source={dropDown}
             style={styles.dropdownIcon}
           />
         </View>
@@ -32,57 +32,42 @@ const CurrentLocation: React.FC<CurrentLocationProps> = ({ location }) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
-    gap: 20,
-    fontFamily: 'SpaceGrotesk-Regular, sans-serif',
-    color: 'rgba(0, 0, 0, 1)',
-    textAlign: 'center',
-    justifyContent: 'flex-start',
-    width: 181,
+    // padding: 10,
+    // backgroundColor: 'green',
+    borderRadius: 5,
   },
   locationIcon: {
-    alignSelf: 'stretch',
-    position: 'relative',
-    display: 'flex',
-    width: 28,
-    flexShrink: 0,
-    margin: 'auto',
-    aspectRatio: 1,
+    width: 38,
+    height: 38,
+    marginRight: 15,
   },
   locationInfo: {
-    alignSelf: 'stretch',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start',
-    width: 133,
-    margin: 'auto',
+    flexDirection: 'column', 
+    justifyContent: 'center',
   },
   locationLabel: {
     fontSize: 13,
     fontWeight: '400',
-    alignSelf: 'flex-start',
+    color: 'black',
+    fontFamily: 'SpaceGrotesk-Regular'
   },
   locationDetails: {
-    display: 'flex',
+    flexDirection: 'row', 
+    alignItems: 'center',
     marginTop: 5,
-    alignItems: 'flex-end',
-    gap: 5,
-    fontSize: 15,
-    fontWeight: '600',
-    justifyContent: 'flex-start',
   },
   locationText: {
     fontSize: 15,
     fontWeight: '600',
+    color: 'black',
+    marginRight: 5, 
+     fontFamily: 'SpaceGrotesk-Bold'
   },
   dropdownIcon: {
-    position: 'relative',
-    display: 'flex',
-    width: 20,
-    flexShrink: 0,
-    aspectRatio: 1,
+    width: 25,
+    height: 25,
   },
 });
 
