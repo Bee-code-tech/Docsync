@@ -53,15 +53,16 @@ const MainTabs: React.FC = () => {
                 source={iconSource}
                 style={[
                   styles.icon,
-                  { tintColor: focused ? '#800080' : 'gray' },
+                  { tintColor: focused ? 'black' : 'gray' },
                 ]}
               />
             </View>
           );
         },
         tabBarShowLabel: true,
-        tabBarActiveTintColor: '#800080',
+        tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'gray',
+        tabBarActiveFontFamily: 'SpaceGrotesk-Regular',
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
@@ -77,10 +78,11 @@ const styles = StyleSheet.create({
   iconContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 30
   },
   icon: {
-    width: 24,
-    height: 24,
+    width: 30,
+    height: 28,
     resizeMode: 'contain',
   },
   activeLine: {
@@ -88,7 +90,7 @@ const styles = StyleSheet.create({
     bottom: -5,
     width: '100%',
     height: 3,
-    backgroundColor: '#800080',
+    backgroundColor: 'black',
   },
 });
 
