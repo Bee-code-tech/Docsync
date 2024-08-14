@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
   getStartedButtonText: {
     color: '#4D4AD3', // Purple color text
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '600',
     fontFamily: 'SpaceGrotesk-Bold',
   },
 });

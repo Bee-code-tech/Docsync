@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 32,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginBottom: 10,
     marginTop: 170,
     fontFamily: 'SpaceGrotesk-Bold',
@@ -93,8 +93,9 @@ const styles = StyleSheet.create({
   label: {
     marginBottom:10,
     fontSize: 16,
-    fontFamily: 'SpaceGrotesk-Regular',
-    fontWeight: 'bold',
+    fontFamily: 'SpaceGrotesk-Bold',
+    fontWeight: '600',
+    color: 'black'
   },
   subheading: {
     fontSize: 18,
@@ -128,8 +129,8 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
-    fontFamily: 'SpaceGrotesk-Regular',
+    fontWeight: '600',
+    fontFamily: 'SpaceGrotesk-Bold',
   },
   buttonDown: {
   backgroundColor: 'rgba(77, 74, 211, 0.1)', 
@@ -141,7 +142,8 @@ const styles = StyleSheet.create({
 buttonTextDown: {
   color: 'black',
   fontSize: 16,
-  fontWeight: 'bold',
+  fontWeight: '600',
+  fontFamily: 'SpaceGrotesk-Bold',
 },
 
 
@@ -152,7 +154,9 @@ buttonTextDown: {
   },
   footerText: {
     fontSize: 16,
-    fontFamily: 'SpaceGrotesk-Regular',
+
+    fontFamily: 'SpaceGrotesk-Bold',
+    fontWeight: '600'
   },
   linkText: {
     fontSize: 16,

@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 32,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginBottom: 10,
     fontFamily: 'SpaceGrotesk-Bold',
     marginTop: 80,
@@ -117,8 +117,9 @@ const styles = StyleSheet.create({
   label: {
     marginBottom: 10,
     fontSize: 16,
-    fontFamily: 'SpaceGrotesk-Regular',
-    fontWeight: 'bold',
+    fontFamily: 'SpaceGrotesk-Bold',
+    fontWeight: '600',
+    color: 'black',
   },
   subheading: {
     fontSize: 18,
@@ -156,9 +157,9 @@ const styles = StyleSheet.create({
   },
   googleButtonText: {
     color: 'black',
-    fontFamily: 'SpaceGrotesk-Regular',
+    fontFamily: 'SpaceGrotesk-Bold',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
   },
   googleIcon: {
     marginRight: 10,
@@ -166,8 +167,8 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
-    fontFamily: 'SpaceGrotesk-Regular',
+    fontWeight: '600',
+    fontFamily: 'SpaceGrotesk-Bold',
   },
   footer: {
     flexDirection: 'row',
