@@ -9,6 +9,7 @@ type NextDoseScheduleProps = {
   nextDoseTime: string;
   remainingDoses: number;
   scheduleDates: string[];
+  isHorizontal: boolean;
 };
 
 const NextDoseSchedule: React.FC<NextDoseScheduleProps> = ({
@@ -16,29 +17,65 @@ const NextDoseSchedule: React.FC<NextDoseScheduleProps> = ({
   nextDoseTime,
   remainingDoses,
   scheduleDates,
+  isHorizontal,
 }) => {
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          marginTop: isHorizontal ? 55 : 5, // Adjust marginTop based on layout direction
+        },
+        isHorizontal ? styles.horizontal : styles.vertical,
+      ]}
+    >
       <View style={styles.leftBox}>
         <View style={styles.nextDoseInfo}>
           <View style={styles.nextDoseHeader}>
-            <Text style={styles.nextDoseLabel}>Next Scheduled Dose:</Text>
+            <Text
+              style={[
+                styles.nextDoseLabel,
+                !isHorizontal && styles.verticalNextDoseLabel, // Increase font size in vertical mode
+              ]}
+            >
+              Next Scheduled Dose:
+            </Text>
             <Image resizeMode="contain" source={info} style={styles.nextDoseIcon} />
           </View>
-          <Text style={styles.nextDoseDateTime}>
+          <Text
+            style={[
+              styles.nextDoseDateTime,
+              !isHorizontal && styles.verticalNextDoseDateTime, // Increase font size in vertical mode
+            ]}
+          >
             {nextDoseDate} by {nextDoseTime}
           </Text>
         </View>
-        <View style={styles.remainingDosesBadge}>
+        <View
+          style={[
+            styles.remainingDosesBadge,
+            !isHorizontal && styles.verticalRemainingDosesBadge, // Adjust badge width in vertical mode
+          ]}
+        >
           <Image resizeMode="contain" source={progress} style={styles.remainingDosesIcon} />
           <Text style={styles.remainingDosesText}>Remaining Doses: {remainingDoses} Doses</Text>
         </View>
       </View>
 
-      <View style={styles.rightBox}>
+      <View
+        style={[
+          styles.rightBox,
+          {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: !isHorizontal ? 'center' : 'flex-end',
+            marginLeft: isHorizontal ? 10 : 0,
+          },
+        ]}
+      >
         {scheduleDates.map((date, index) => (
           <View key={index} style={styles.scheduleItem}>
-            <View style={styles.barContainer}>
+            <View style={[styles.barContainer, isHorizontal ? styles.horizontalBar : styles.verticalBar]}>
               <View style={styles.bar} />
               {index === 2 && (
                 <Image
@@ -48,7 +85,14 @@ const NextDoseSchedule: React.FC<NextDoseScheduleProps> = ({
                 />
               )}
             </View>
-            <Text style={styles.dateText}>{date}</Text>
+            <Text
+              style={[
+                styles.dateText,
+                !isHorizontal && styles.verticalDateText, // Increase date text size in vertical mode
+              ]}
+            >
+              {date}
+            </Text>
           </View>
         ))}
       </View>
@@ -58,21 +102,29 @@ const NextDoseSchedule: React.FC<NextDoseScheduleProps> = ({
 
 const styles = StyleSheet.create({
   container: {
+    marginBottom: 0,
+    backgroundColor: 'transparent',
+    borderRadius: 10,
+  },
+  horizontal: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 0,
-    marginTop: 55,
-    backgroundColor: 'transparent',
-    borderRadius: 10,
-    marginBottom: 20
+  },
+  vertical: {
+    flexDirection: 'column',
+    alignItems: 'center', // Center content in vertical mode
   },
   leftBox: {
     flex: 1,
     marginRight: 10,
+    marginBottom: 10,
+    alignItems: 'center', // Center content in vertical mode
   },
   nextDoseInfo: {
-    marginBottom: 10,
+    marginBottom: 20,
+    alignItems: 'center', // Center content in vertical mode
   },
   nextDoseHeader: {
     flexDirection: 'row',
@@ -86,6 +138,9 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: 'SpaceGrotesk-Regular',
   },
+  verticalNextDoseLabel: {
+    fontSize: 14, // Increase font size in vertical mode
+  },
   nextDoseIcon: {
     width: 14,
     height: 14,
@@ -95,7 +150,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontFamily: 'SpaceGrotesk-Bold',
     color: 'white',
-
+    marginBottom: 10,
+  },
+  verticalNextDoseDateTime: {
+    fontSize: 20, // Increase font size in vertical mode
   },
   remainingDosesBadge: {
     flexDirection: 'row',
@@ -105,6 +163,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 20,
     marginTop: 6,
+    alignSelf: 'center', // Center the badge in vertical mode
+  },
+  verticalRemainingDosesBadge: {
+    width: 'auto', // Make the badge width fit its content
+    marginBottom: 50,
+    marginTop: -20,
   },
   remainingDosesIcon: {
     width: 8,
@@ -118,24 +182,25 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   rightBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     flex: 1,
-    marginLeft: 10,
   },
   scheduleItem: {
     alignItems: 'center',
     justifyContent: 'flex-end',
-    position: 'relative',  // Ensure the bar container is positioned relatively
+    position: 'relative',
+    marginRight: 5,
   },
   barContainer: {
     width: 20,
-    height: 60,
     borderRadius: 10,
     backgroundColor: '#C4C4C4',
-    marginBottom: 5,
-    position: 'relative', // To position the badge absolutely within this container
+    position: 'relative',
+  },
+  horizontalBar: {
+    height: 60, // Regular height for horizontal mode
+  },
+  verticalBar: {
+    height: 90, // Increased height for vertical mode
   },
   bar: {
     flex: 1,
@@ -148,13 +213,17 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: 3,
   },
+  verticalDateText: {
+    fontSize: 14, // Increase date text size in vertical mode
+    marginBottom: 20, // Increase bottom margin in vertical mode
+  },
   currentDateIcon: {
     width: 45,
     height: 35,
     position: 'absolute',
     top: -45,
     left: '50%',
-    transform: [{ translateX: -22.5 }], // Centers the badge horizontally on the bar
+    transform: [{ translateX: -22.5 }],
   },
 });
 

@@ -11,6 +11,7 @@ type DosageInfoProps = {
   usedDoses: number;
   adherenceRate: number;
   lastDoseTaken: string;
+  isHorizontal: boolean;
 };
 
 const DosageInfo: React.FC<DosageInfoProps> = ({
@@ -19,41 +20,54 @@ const DosageInfo: React.FC<DosageInfoProps> = ({
   usedDoses,
   adherenceRate,
   lastDoseTaken,
+  isHorizontal,
 }) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.dosageCard}>
+    <View style={[styles.container, isHorizontal ? styles.horizontal : styles.vertical]}>
+      <View style={[styles.dosageCard, !isHorizontal && styles.verticalCard]}>
         <View style={styles.cardHeader}>
-          <Text style={styles.cardTitle}>Total Doses Prescribed</Text>
+          <Text style={[styles.cardTitle, !isHorizontal && styles.verticalCardTitle]}>
+            Total Doses Prescribed
+          </Text>
           <Image resizeMode="contain" source={infoDark} style={styles.cardIcon} />
         </View>
         <View style={styles.dosageInfo}>
           <Image resizeMode="contain" source={doses} style={styles.dosageIcon} />
-          <Text style={styles.dosageText}>{totalDoses} doses</Text>
+          <Text style={[styles.dosageText, !isHorizontal && styles.verticalDosageText]}>
+            {totalDoses} doses
+          </Text>
         </View>
-        <View style={styles.badge}>
+        <View style={[styles.badge, !isHorizontal && styles.verticalBadge]}>
           <Image resizeMode="contain" source={time} style={styles.badgeIcon} />
           <Text style={styles.badgeText}>{frequency}</Text>
         </View>
       </View>
-      
-      <View style={styles.dosageCard}>
+
+      <View style={[styles.dosageCard, !isHorizontal && styles.verticalCard]}>
         <View style={styles.cardHeader}>
-          <Text style={styles.cardTitle}>Total Doses Used</Text>
+          <Text style={[styles.cardTitle, !isHorizontal && styles.verticalCardTitle]}>
+            Total Doses Used
+          </Text>
           <Image resizeMode="contain" source={infoDark} style={styles.cardIcon} />
         </View>
         <View style={styles.dosageInfo}>
           <Image resizeMode="contain" source={doses} style={styles.dosageIcon} />
-          <Text style={styles.dosageText}>{usedDoses} doses</Text>
+          <Text style={[styles.dosageText, !isHorizontal && styles.verticalDosageText]}>
+            {usedDoses} doses
+          </Text>
         </View>
         <View style={styles.adherenceInfo}>
-          <Text style={styles.adherenceLabel}>Adherence Rate</Text>
+          <Text style={[styles.adherenceLabel, !isHorizontal && styles.verticalAdherenceLabel]}>
+            Adherence Rate
+          </Text>
           <View style={styles.adherenceRate}>
             <Image resizeMode="contain" source={rate} style={styles.adherenceIcon} />
-            <Text style={styles.adherenceText}>{adherenceRate}%</Text>
+            <Text style={[styles.adherenceText, !isHorizontal && styles.verticalAdherenceText]}>
+              {adherenceRate}%
+            </Text>
           </View>
         </View>
-        <View style={styles.badge}>
+        <View style={[styles.badge, !isHorizontal && styles.verticalBadge]}>
           <Image resizeMode="contain" source={time} style={styles.badgeIcon} />
           <Text style={styles.badgeText}>Last Dose: {lastDoseTaken}</Text>
         </View>
@@ -64,20 +78,29 @@ const DosageInfo: React.FC<DosageInfoProps> = ({
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 25,
+  },
+  horizontal: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     gap: 10,
-    marginTop: 25,
+  },
+  vertical: {
+    flexDirection: 'column',
   },
   dosageCard: {
     flex: 1,
-    borderRadius: 10,
+    borderRadius: 5,
     backgroundColor: '#FFFFFF',
     padding: 10,
     borderWidth: 1,
     borderColor: 'rgba(236, 236, 236, 1)',
     height: 'auto',
+    marginBottom: 10, // Added margin for vertical layout
+  },
+  verticalCard: {
+    marginBottom: 20, // Larger margin for vertical layout
   },
   cardHeader: {
     flexDirection: 'row',
@@ -90,6 +113,9 @@ const styles = StyleSheet.create({
     color: 'black',
     fontFamily: 'SpaceGrotesk-Bold',
     marginRight: 5,
+  },
+  verticalCardTitle: {
+    fontSize: 14, // Increased font size for vertical layout
   },
   cardIcon: {
     width: 9,
@@ -110,6 +136,9 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontFamily: 'SpaceGrotesk-Bold',
   },
+  verticalDosageText: {
+    fontSize: 30, // Increased font size for vertical layout
+  },
   badge: {
     marginTop: 10,
     borderRadius: 20,
@@ -118,6 +147,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 6,
     paddingVertical: 5,
+  },
+  verticalBadge: {
+    width: 'auto', // Ensure the badge width fits its content
   },
   badgeIcon: {
     width: 9,
@@ -133,15 +165,15 @@ const styles = StyleSheet.create({
     marginTop: -10,
     flexDirection: 'row',
     alignItems: 'center',
-    display: 'flex',
-    color: 'black'
-    
   },
   adherenceLabel: {
     fontSize: 8,
     fontWeight: '500',
     fontFamily: 'SpaceGrotesk-Regular',
-    color: 'black'
+    color: 'black',
+  },
+  verticalAdherenceLabel: {
+    fontSize: 10, // Increased font size for vertical layout
   },
   adherenceRate: {
     flexDirection: 'row',
@@ -157,6 +189,9 @@ const styles = StyleSheet.create({
     fontSize: 9,
     fontWeight: '700',
     fontFamily: 'SpaceGrotesk-Regular',
+  },
+  verticalAdherenceText: {
+    fontSize: 11, // Increased font size for vertical layout
   },
 });
 

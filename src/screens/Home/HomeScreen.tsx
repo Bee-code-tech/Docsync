@@ -26,6 +26,7 @@ const HomeScreen = () => {
           doctor="Adeleke"
           antibiotic="Azithromycin"
           startDate="Jan 10, 2024"
+          orientation={true}
         />
         <AIHealthAssessment />
         <PharmacyStore />

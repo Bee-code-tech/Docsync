@@ -11,6 +11,8 @@ type TreatmentOverviewProps = {
   doctor: string;
   antibiotic: string;
   startDate: string;
+  endDate?: string; // Made endDate optional
+  orientation: boolean;
 };
 
 const TreatmentOverview: React.FC<TreatmentOverviewProps> = ({
@@ -18,6 +20,8 @@ const TreatmentOverview: React.FC<TreatmentOverviewProps> = ({
   doctor,
   antibiotic,
   startDate,
+  endDate,
+  orientation,
 }) => {
   return (
     <View style={styles.container}>
@@ -25,74 +29,102 @@ const TreatmentOverview: React.FC<TreatmentOverviewProps> = ({
       <View style={styles.header}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Current Treatment Overview</Text>
-          <Image
-            resizeMode="contain"
-            source={info}
-            style={styles.titleIcon}
-          />
+          <Image resizeMode="contain" source={info} style={styles.titleIcon} />
         </View>
         <TouchableOpacity style={styles.updateButton}>
           <Text style={styles.updateText}>Update</Text>
-          <Image
-            resizeMode="contain"
-            source={refresh}
-            style={styles.updateIcon}
-          />
+          <Image resizeMode="contain" source={refresh} style={styles.updateIcon} />
         </TouchableOpacity>
       </View>
 
       {/* Details Section */}
-      <View style={styles.detailsContainer}>
-        {/* First Column */}
-        <View style={styles.detailColumn}>
-          <Text style={styles.detailLabel}>Health Condition</Text>
-          <Text style={styles.detailValue}>{condition}</Text>
-          <View style={styles.diagnosisContainer}>
-            <Image
-              resizeMode="contain"
-              source={verified}
-              style={styles.diagnosisIcon}
-            />
-            <Text style={styles.diagnosisText}>Diagnosis by Dr. {doctor}</Text>
+      {orientation ? (
+        <View style={styles.detailsContainerHorizontal}>
+          {/* First Column */}
+          <View style={styles.detailColumn}>
+            <Text style={styles.detailLabel}>Health Condition</Text>
+            <Text style={styles.detailValue}>{condition}</Text>
+            <View style={styles.diagnosisContainer}>
+              <Image resizeMode="contain" source={verified} style={styles.diagnosisIcon} />
+              <Text style={styles.diagnosisText}>Diagnosis by Dr. {doctor}</Text>
+            </View>
+          </View>
+
+          {/* Second Column */}
+          <View style={styles.detailColumn}>
+            <Text style={styles.detailLabel}>Prescribed Antibiotic</Text>
+            <Text style={styles.detailValue}>{antibiotic}</Text>
+            <View style={styles.diagnosisContainer}>
+              <Image resizeMode="contain" source={verified} style={styles.diagnosisIcon} />
+              <Text style={styles.diagnosisText}>As prescribed by Dr. {doctor}</Text>
+            </View>
+          </View>
+
+          {/* Third Column */}
+          <View style={styles.detailColumn}>
+            <Text style={styles.detailLabel}>Start Date</Text>
+            <Text style={styles.detailValue}>{startDate}</Text>
+            {endDate && ( // Only display End Date if it exists
+              <>
+                <Text style={styles.detailLabel}>End Date</Text>
+                <Text style={styles.detailValue}>{endDate}</Text>
+              </>
+            )}
           </View>
         </View>
-
-        {/* Second Column */}
-        <View style={styles.detailColumn}>
-          <Text style={styles.detailLabel}>Prescribed Antibiotic</Text>
-          <Text style={styles.detailValue}>{antibiotic}</Text>
-          <View style={styles.diagnosisContainer}>
-            <Image
-              resizeMode="contain"
-              source={verified}
-              style={styles.diagnosisIcon}
-            />
-            <Text style={styles.diagnosisText}>As prescribed by Dr. {doctor}</Text>
+      ) : (
+        <View style={styles.detailsContainerVertical}>
+          <View style={styles.row}>
+            {/* First Row */}
+            <View style={styles.column}>
+              <Text style={styles.detailLabelLarge}>Health Condition</Text>
+              <Text style={styles.detailValueLarge}>{condition}</Text>
+              <View style={styles.diagnosisContainer}>
+                <Image resizeMode="contain" source={verified} style={styles.diagnosisIcon} />
+                <Text style={styles.diagnosisText}>Diagnosis by Dr. {doctor}</Text>
+              </View>
+            </View>
+            <View style={styles.column}>
+              <Text style={styles.detailLabelLarge}>Prescribed Antibiotic</Text>
+              <Text style={styles.detailValueLarge}>{antibiotic}</Text>
+              <View style={styles.diagnosisContainer}>
+                <Image resizeMode="contain" source={verified} style={styles.diagnosisIcon} />
+                <Text style={styles.diagnosisText}>As prescribed by Dr. {doctor}</Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.row}>
+            {/* Second Row */}
+            <View style={styles.column}>
+              <Text style={styles.detailLabelLarge}>Treatment Start Date:</Text>
+              <Text style={styles.detailValueLarge}>{startDate}</Text>
+            </View>
+            {endDate && ( // Only display End Date if it exists
+              <View style={styles.column}>
+                <Text style={styles.detailLabelLarge}>Treatment End Date:</Text>
+                <Text style={styles.detailValueLarge}>{endDate}</Text>
+              </View>
+            )}
           </View>
         </View>
+      )}
 
-        {/* Third Column */}
-        <View style={styles.detailColumnThree}>
-          <Text style={styles.detailLabelThree}>Start Date</Text>
-          <Text style={styles.detailValueThree}>{startDate}</Text>
-        </View>
-      </View>
+      <DosageInfo
+        totalDoses={10}
+        frequency="1 pill every 12 hours"
+        usedDoses={5}
+        adherenceRate={50}
+        lastDoseTaken="January 13, 4:32 PM"
+        isHorizontal={orientation}
+      />
 
-       <DosageInfo
-            totalDoses={10}
-            frequency="1 pill every 12 hours"
-            usedDoses={5}
-            adherenceRate={50}
-            lastDoseTaken="January 13, 4:32 PM"
-          />
-         
-           <NextDoseSchedule
-            nextDoseDate="Jan 13, 2024"
-            nextDoseTime="4:32 AM"
-            remainingDoses={7}
-            scheduleDates={['Jan 11', 'Jan 12', 'Jan 13', 'Jan 14', 'Jan 15']}
-          />
-
+      <NextDoseSchedule
+        nextDoseDate="Jan 13, 2024"
+        nextDoseTime="4:32 AM"
+        remainingDoses={7}
+        scheduleDates={['Jan 11', 'Jan 12', 'Jan 13', 'Jan 14', 'Jan 15']}
+        isHorizontal={orientation}
+      />
     </View>
   );
 };
@@ -119,7 +151,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#FFFFFF',
     fontWeight: '600',
-    fontFamily: 'SpaceGrotesk-Bold'
+    fontFamily: 'SpaceGrotesk-Bold',
   },
   titleIcon: {
     width: 10,
@@ -146,55 +178,55 @@ const styles = StyleSheet.create({
     height: 15,
     marginLeft: 5,
   },
-  detailsContainer: {
+  detailsContainerHorizontal: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    gap: 7
-    // backgroundColor: 'red'
+    gap: 7,
+  },
+  detailsContainerVertical: {
+    flexDirection: 'column',
+    marginBottom: -20,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  column: {
+    flex: 1,
+    alignItems: 'flex-start',
   },
   detailColumn: {
     flex: 1,
-    // marginRight:,
     alignItems: 'flex-start',
-    // justifyContent: 'center'
-    // backgroundColor: 'red'
   },
-  detailColumnThree: {
-    flex: 1,
-    marginLeft: 1,
-    alignItems: 'flex-start',
-    // justifyContent: 'center'
-    // backgroundColor: 'red'
-  },
-  detailLabelThree: {
-    fontSize: 11,
+  detailLabelLarge: {
+    fontSize: 13,
     color: '#FFFFFF',
     marginBottom: 0,
-    marginLeft: 10,
     fontWeight: '600',
-    fontFamily: 'SpaceGrotesk-Regular'
+    fontFamily: 'SpaceGrotesk-Regular',
   },
   detailLabel: {
     fontSize: 11,
     color: '#FFFFFF',
     marginBottom: 0,
     fontWeight: '600',
-    fontFamily: 'SpaceGrotesk-Regular'
+    fontFamily: 'SpaceGrotesk-Regular',
   },
-  detailValueThree: {
-    fontSize: 14,
+  detailValueLarge: {
+    fontSize: 24,
     color: '#FFFFFF',
-     marginLeft: 10,
     fontWeight: '600',
-    marginBottom: 3,
-    fontFamily: 'SpaceGrotesk-Bold'
+    marginBottom: -5,
+    fontFamily: 'SpaceGrotesk-Bold',
   },
   detailValue: {
     fontSize: 14,
     color: '#FFFFFF',
     fontWeight: '600',
     marginBottom: 3,
-    fontFamily: 'SpaceGrotesk-Bold'
+    fontFamily: 'SpaceGrotesk-Bold',
   },
   diagnosisContainer: {
     flexDirection: 'row',
@@ -211,9 +243,9 @@ const styles = StyleSheet.create({
     marginRight: 1,
   },
   diagnosisText: {
-    fontSize: 7,
+    fontSize: 10,
     color: '#FFFFFF',
-    fontFamily: 'SpaceGrotesk-Bold'
+    fontFamily: 'SpaceGrotesk-Bold',
   },
 });
 
