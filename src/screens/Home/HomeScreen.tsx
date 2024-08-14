@@ -6,6 +6,7 @@ import TreatmentOverview from '../../components/TreatmentOverview';
 import DosageInfo from '../../components/DosageInfo';
 import NextDoseSchedule from '../../components/NextDoseSchedule';
 import AIHealthAssessment from '../../components/AIHealthAssessment';
+import PharmacyStore from '../../components/PharmacyStore';
 
 const HomeScreen = () => {
    return (
@@ -23,11 +24,9 @@ const HomeScreen = () => {
           antibiotic="Azithromycin"
           startDate="Jan 10, 2024"
         />
-        <View style={styles.dosageContainer}>
-         
-        
-        </View>
         <AIHealthAssessment />
+
+        <PharmacyStore />
       </View>
       {/* <Text>
         HomeScreen
