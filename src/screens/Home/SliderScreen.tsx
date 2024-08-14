@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, Animated, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, Animated, TouchableOpacity, StatusBar } from 'react-native';
 import Logo from '../../assets/logo.png';
 import slide1 from '../../assets/slide1.png';
 import slide2 from '../../assets/slide2.png';
@@ -12,7 +12,6 @@ import { AuthStackParamList } from '../../navigation/AuthStack';
 interface SliderScreenProps {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
 
 type SliderItem = {
   id: string;
@@ -36,7 +35,7 @@ const SLIDER_DATA: SliderItem[] = [
   {
     id: '3',
     image: slide3,
-    description: 'Get 24/7 access to reliavle healthcare professionals',
+    description: 'Get 24/7 access to reliable healthcare professionals',
   },
   {
     id: '4',
@@ -121,15 +120,17 @@ const Carousel: React.FC<{ data: SliderItem[] }> = ({ data }) => {
   );
 };
 
-const SliderScreen: React.FC<SliderScreenProps> = ({setIsLoggedIn}) => {
+const SliderScreen: React.FC<SliderScreenProps> = ({ setIsLoggedIn }) => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
 
   const handleGetStartedPress = () => {
-    setIsLoggedIn(true)
+    setIsLoggedIn(true);
   };
 
   return (
     <View style={styles.container}>
+      {/* Transparent StatusBar */}
+      <StatusBar translucent backgroundColor="transparent" barStyle="light-content" />
       <Carousel data={SLIDER_DATA} />
       <TouchableOpacity style={styles.getStartedButton} onPress={handleGetStartedPress}>
         <Text style={styles.getStartedButtonText}>Get Started</Text>

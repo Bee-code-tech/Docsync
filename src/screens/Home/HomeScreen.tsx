@@ -1,5 +1,5 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { ScrollView, StyleSheet, View, StatusBar } from 'react-native';
 import Header from '../../components/Header';
 import NotificationBanner from '../../components/NotificationBanner';
 import TreatmentOverview from '../../components/TreatmentOverview';
@@ -9,8 +9,11 @@ import AIHealthAssessment from '../../components/AIHealthAssessment';
 import PharmacyStore from '../../components/PharmacyStore';
 
 const HomeScreen = () => {
-   return (
+  return (
     <ScrollView style={styles.container}>
+      {/* Set StatusBar to white with dark content */}
+      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
+      
       <View style={styles.content}>
         <Header />
         <NotificationBanner
@@ -25,16 +28,11 @@ const HomeScreen = () => {
           startDate="Jan 10, 2024"
         />
         <AIHealthAssessment />
-
         <PharmacyStore />
       </View>
-      {/* <Text>
-        HomeScreen
-      </Text> */}
     </ScrollView>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -58,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen
+export default HomeScreen;

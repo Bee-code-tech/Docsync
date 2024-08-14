@@ -7,8 +7,8 @@ import sampleDrugImage3 from '../assets/icons/drug3.png';
 
 const PharmacyStore: React.FC = () => {
   const drugs = [
-    { id: 1, name: 'Cefazolin Sodium 1 gram Powder 25/Pack (RX)', originalPrice: '₦500', discountedPrice: '₦40', image: sampleDrugImage1 },
-    { id: 2, name: 'Rocephin Ceftriaxone Injection 1g IV', originalPrice: '₦60', discountedPrice: '₦48', image: sampleDrugImage2 },
+    { id: 1, name: 'Cefazolin Sodium 1 gram Powder 25/Pack (RX)', originalPrice: '₦ 5,000', discountedPrice: '₦3,500', image: sampleDrugImage1 },
+    { id: 2, name: 'Rocephin Ceftriaxone Injection 1g IV', originalPrice: '₦6,000', discountedPrice: '₦4,800', image: sampleDrugImage2 },
     { id: 3, name: 'Levoflaxin Tablets USP 500mg', originalPrice: '₦30', discountedPrice: '₦24', image: sampleDrugImage3 },
     { id: 4, name: 'Drug Name 4', originalPrice: '₦70', discountedPrice: '₦56', image: sampleDrugImage1 },
     { id: 5, name: 'Drug Name 5', originalPrice: '₦90', discountedPrice: '₦72', image: sampleDrugImage2 },
@@ -37,8 +37,8 @@ const PharmacyStore: React.FC = () => {
             <Text style={styles.drugName}>{drug.name}</Text>
             <View style={styles.spacer} />
             <View style={styles.priceRow}>
-              <Text style={styles.originalPrice}>{drug.originalPrice}</Text>
               <Text style={styles.discountedPrice}>{drug.discountedPrice}</Text>
+              <Text style={styles.originalPrice}>{drug.originalPrice}</Text>
               <TouchableOpacity style={styles.addButton}>
                 <Image source={plusIcon} style={styles.plusIcon} />
               </TouchableOpacity>
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   addButton: {
     backgroundColor: '#4D4AD3',
     borderRadius: 50,
-    padding: 5,
+    padding: 8,
   },
   plusIcon: {
     width: 16,
